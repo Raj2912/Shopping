@@ -44,12 +44,21 @@ export class ItemsService {
         alert(item.ProductName + " item added to cart.");
       }
     } else { 
-      for (var i=0; i < this.cartArray.length; i++) {
-       if (this.cartArray[i].Id == item.Id) {
-        this.cartArray[i].Quantity = item.Quantity;
-       }
+      if(item.Quantity > 0){
+        for (var i=0; i < this.cartArray.length; i++) {
+          if (this.cartArray[i].Id == item.Id) {
+            this.cartArray[i].Quantity = item.Quantity;
+          }
+        }
+        alert(item.ProductName + " item added to cart."); 
+      }else{
+        for (var i=0; i < this.cartArray.length; i++) {
+          if (this.cartArray[i].Id == item.Id) {
+            this.cartArray.splice(i , 1);
+          }
+        }
+        alert(item.ProductName + " item removed from cart.");
       }
-      alert(item.ProductName + " item added to cart."); 
     }
 
     console.log("cartArray after push", this.cartArray);
