@@ -17,7 +17,7 @@ export class ItemsService {
     });
 
     return this.http
-      .get("https://raj2912.github.io/Shopping/dist/shopping/assets/data.json", { headers: headers })
+      .get("https://api.myjson.com/bins/grhbs", { headers: headers })
       .toPromise()
       .then(res => res.json())
       .catch(err => {
