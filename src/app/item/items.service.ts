@@ -1,63 +1,63 @@
-import { Injectable } from '@angular/core';
-import { Item } from './item';
-import { Http, Headers } from '@angular/http';
+import { Injectable } from "@angular/core";
+import { Item } from "./item";
+import { Http, Headers } from "@angular/http";
 
-import { Observable, of } from 'rxjs';
+import { Observable, of } from "rxjs";
+import { ModalService } from '../_modal';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ItemsService {
-
-  constructor(private http:Http) { }
+  constructor(private http: Http, private modalService: ModalService) {}
 
   getItems(): Promise<Item[]> {
     let headers = new Headers({
-      'Content-type': 'application/json'
-  });
+      "Content-type": "application/json"
+    });
 
-  return this.http.get("http://localhost:3000/productDetails", {headers: headers})
+    return this.http
+      .get("http://localhost:3000/productDetails", { headers: headers })
       .toPromise()
       .then(res => res.json())
       .catch(err => {
-          return Promise.reject(err.json().error  || 'Server error');
+        return Promise.reject(err.json().error || "Server error");
       });
   }
 
-  cartArray = []
+  cartArray = [];
 
   addToCart(item: any): Observable<Item[]> {
-    
     var idArray = [];
 
     for (var i = 0; i < this.cartArray.length; i++) {
       if (idArray.indexOf(this.cartArray[i].Id) == -1) {
-        idArray.push(this.cartArray[i].Id)
+        idArray.push(this.cartArray[i].Id);
       }
     }
-    
+
     if (idArray.indexOf(item.Id) == -1) {
       console.log("item successfully got pushed to idArray", idArray);
       //item.Quantity = item.Quantity + 1;
-      if(item.Quantity > 0){
+      if (item.Quantity > 0) {
         this.cartArray.push(item);
-        alert(item.ProductName + " item added to cart.");
+        this.modalService.open("custom-modal-2");
       }
-    } else { 
-      if(item.Quantity > 0){
-        for (var i=0; i < this.cartArray.length; i++) {
+    } else {
+      if (item.Quantity > 0) {
+        for (var i = 0; i < this.cartArray.length; i++) {
           if (this.cartArray[i].Id == item.Id) {
             this.cartArray[i].Quantity = item.Quantity;
           }
         }
-        alert(item.ProductName + " item added to cart."); 
-      }else{
-        for (var i=0; i < this.cartArray.length; i++) {
+        this.modalService.open("custom-modal-2");
+      } else {
+        for (var i = 0; i < this.cartArray.length; i++) {
           if (this.cartArray[i].Id == item.Id) {
-            this.cartArray.splice(i , 1);
+            this.cartArray.splice(i, 1);
           }
         }
-        alert(item.ProductName + " item removed from cart.");
+        this.modalService.open("custom-modal-1");
       }
     }
 
@@ -65,7 +65,15 @@ export class ItemsService {
     return of(this.cartArray);
   }
 
-  getCartList() :Observable<Item[]> {
-    return of(this.cartArray)
+  getCartList(): Observable<Item[]> {
+    return of(this.cartArray);
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
   }
 }

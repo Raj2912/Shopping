@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
  
  import { ItemsService } from '../item/items.service'
- import { Item } from '../item/item'
+ import { Item } from '../item/item';
+ import { ModalService } from '../_modal';
  
  @Component({
   selector: 'app-shopping-items',
@@ -12,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
   items: Item[];
   filterData: Item[];
  
-  constructor(private itemsService: ItemsService) {}
+  constructor(private itemsService: ItemsService, private modalService: ModalService) {}
  
   getItems(): void {
    this.itemsService.getItems()
@@ -41,7 +42,6 @@ import { Component, OnInit } from '@angular/core';
   }
  
   addToCart(item) {
-   console.log("addToCart click item is", item);
    this.itemsService.addToCart(item);
   }
  
@@ -55,5 +55,13 @@ import { Component, OnInit } from '@angular/core';
    if (item.Quantity > 0) {
     item.Quantity = item.Quantity - 1;
    }
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
   }
  }

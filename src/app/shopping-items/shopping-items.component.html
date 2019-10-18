@@ -15,3 +15,15 @@
       <button class="minus" (click)="minusQuantity(item)">-</button>
     </div>
 </div>
+
+<jw-modal id="custom-modal-1">
+    <h1>Successful</h1>
+    <p>Item removed from cart.</p>
+    <button (click)="closeModal('custom-modal-1');">Close</button>
+</jw-modal>
+
+<jw-modal id="custom-modal-2">
+    <h1>Successful</h1>
+    <p>Item added to cart.</p>
+    <button (click)="closeModal('custom-modal-2');">Close</button>
+</jw-modal>
