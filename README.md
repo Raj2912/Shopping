@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
+## Json server API Installation
+
+To global install the json server run cmd `npm install -g json-server` in the path ./src/assets/.
+
+## Json server API
+
+Run `json-server --watch db.json` to run the server and get the data.json in the path ./src/assets/.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
