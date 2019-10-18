@@ -80,6 +80,14 @@
     float: none;
   }
 
+  .icon-cart{
+    top: 65px !important;
+  }
+
+  .plus{
+    margin-left: 0px;
+  }
+
   .img-div {
     float: none;
   }
@@ -88,6 +96,14 @@
 @media screen and (max-width: 340px) {
   .img {
     float: none;
+  }
+
+  .icon-cart{
+    top: 65px !important;
+  }
+
+  .plus{
+    margin-left: 0px;
   }
 
   .img-div {
